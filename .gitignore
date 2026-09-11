@@ -1,1 +1,51 @@
+# Python & Backend
 .venv
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependências e Builds Frontend
+node_modules
+dist
+dist-ssr
+*.local
+
+# Variáveis de Ambiente (Segurança)
+.env
+.env.production
+.env.*.local
+
+# Cobertura de Testes
+coverage
+
+# Cache de Compilação
+*.tsbuildinfo
+
+# Arquivos do Sistema Operacional
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Configurações do Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
