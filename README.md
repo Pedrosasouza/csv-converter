@@ -30,8 +30,12 @@ Acesse a interface no navegador em `http://localhost:5173`.
 
 ## Testes
 
-Para rodar os testes automatizados do frontend:
+Para rodar os testes automatizados do frontend e backend:
 
 ```bash
+# Frontend (Vitest)
 npm test
+
+# Backend (Pytest)
+python -m pytest test_api.py
 ```

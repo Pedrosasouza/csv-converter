@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ResponsiveContainer,
   BarChart,
@@ -18,6 +18,7 @@ import {
 } from 'recharts';
 import { Dataset } from '../models/dataset';
 import { ChartConfig, validateChartConfig } from '../models/chart';
+import { exportChartAsPng } from '../services/chartService';
 
 export interface ChartPreviewProps {
   dataset: Dataset;
@@ -43,6 +44,21 @@ const CHART_TYPE_LABELS: Record<string, string> = {
 };
 
 export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) => {
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
+
+  const handleExport = async () => {
+    setIsExporting(true);
+    setExportError(null);
+    try {
+      await exportChartAsPng(config, dataset);
+    } catch (err) {
+      setExportError(err instanceof Error ? err.message : 'Falha ao exportar gráfico');
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   if (!dataset.rows || dataset.rows.length === 0) {
     return (
       <div
@@ -94,7 +110,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
             Visualização do Gráfico ({CHART_TYPE_LABELS[config.type] || config.type})
           </h3>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#495084] text-white shadow-2xs">
             <span className="w-2 h-2 rounded-xs bg-white/90"></span>
             {(CHART_TYPE_LABELS[config.type] || config.type).toUpperCase()}
@@ -103,8 +119,51 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
             X: <strong className="text-[#1c1e2c]">{config.xColumn}</strong> · Y:{' '}
             <strong className="text-[#1c1e2c]">{config.yColumn}</strong>
           </span>
+          <button
+            type="button"
+            onClick={handleExport}
+            disabled={isExporting}
+            data-testid="export-png-button"
+            aria-label="Exportar gráfico em PNG de alta resolução via Matplotlib"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#5862a5] hover:bg-[#495084] text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-2xs cursor-pointer ml-2"
+          >
+            {isExporting ? (
+              <>
+                <svg className="animate-spin h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+                <span>Exportando...</span>
+              </>
+            ) : (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span>Exportar PNG (Matplotlib)</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
+
+      {exportError && (
+        <div
+          data-testid="export-error"
+          role="alert"
+          className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-xs text-red-700 flex items-center justify-between"
+        >
+          <span>{exportError}</span>
+          <button
+            type="button"
+            onClick={() => setExportError(null)}
+            className="text-red-500 hover:text-red-700 font-bold ml-2 text-sm cursor-pointer"
+            aria-label="Fechar erro"
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       <div className="w-full min-h-[380px] flex items-center justify-center py-2">
         {config.type === 'bar' && (

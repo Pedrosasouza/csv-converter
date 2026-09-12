@@ -1,8 +1,9 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ChartPreview } from '../components/ChartPreview';
 import { mockDataset } from '../mocks/datasetMock';
 import { ChartConfig } from '../models/chart';
+import * as chartService from '../services/chartService';
 
 describe('ChartPreview', () => {
   const barConfig: ChartConfig = {
@@ -109,5 +110,46 @@ describe('ChartPreview', () => {
     }).not.toThrow();
 
     expect(screen.getByTestId('bar-chart')).toBeInTheDocument();
+  });
+
+  it('renderiza o botão de exportar PNG e aciona a exportação ao clicar', async () => {
+    const exportSpy = vi.spyOn(chartService, 'exportChartAsPng').mockResolvedValue();
+
+    render(<ChartPreview dataset={mockDataset} config={barConfig} />);
+
+    const exportBtn = screen.getByTestId('export-png-button');
+    expect(exportBtn).toBeInTheDocument();
+    expect(exportBtn).toHaveTextContent(/exportar png \(matplotlib\)/i);
+
+    fireEvent.click(exportBtn);
+
+    expect(exportSpy).toHaveBeenCalledTimes(1);
+    expect(exportSpy).toHaveBeenCalledWith(barConfig, mockDataset);
+
+    await waitFor(() => {
+      expect(exportBtn).not.toBeDisabled();
+    });
+
+    exportSpy.mockRestore();
+  });
+
+  it('exibe mensagem de erro quando a exportação PNG falha', async () => {
+    const exportSpy = vi.spyOn(chartService, 'exportChartAsPng').mockRejectedValue(new Error('Erro no servidor backend'));
+
+    render(<ChartPreview dataset={mockDataset} config={barConfig} />);
+
+    const exportBtn = screen.getByTestId('export-png-button');
+    fireEvent.click(exportBtn);
+
+    await waitFor(() => {
+      expect(screen.getByTestId('export-error')).toHaveTextContent(/erro no servidor backend/i);
+    });
+
+    // Permite fechar a mensagem de erro
+    const closeBtn = screen.getByLabelText(/fechar erro/i);
+    fireEvent.click(closeBtn);
+    expect(screen.queryByTestId('export-error')).not.toBeInTheDocument();
+
+    exportSpy.mockRestore();
   });
 });

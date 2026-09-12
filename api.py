@@ -3,12 +3,17 @@ import tempfile
 import time
 from typing import Optional
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+import matplotlib
+matplotlib.use("Agg")
+
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile, Response
 from fastapi.middleware.cors import CORSMiddleware
 import numpy as np
 import pandas as pd
+from pydantic import BaseModel
 
 from domain.entities.csv import CsvEntidade
+from domain.casos_de_uso.gerar_grafico_usecase import GerarGraficoUseCase
 
 app = FastAPI(title="CSV Converter API")
 
@@ -133,3 +138,81 @@ async def upload_dataset(
                 os.remove(temp_path)
             except OSError:
                 pass
+
+
+class GenerateChartRequest(BaseModel):
+    tipo_grafico: str
+    coluna_x: str
+    colunas_y: list[str]
+    titulo: Optional[str] = "Gráfico"
+    rows: list[dict]
+
+
+@app.post("/api/charts/generate")
+async def generate_chart(req: GenerateChartRequest):
+    if not req.rows:
+        raise HTTPException(
+            status_code=400,
+            detail="O dataset não possui linhas para gerar o gráfico.",
+        )
+    if not req.coluna_x:
+        raise HTTPException(
+            status_code=400,
+            detail="Coluna do eixo X não informada.",
+        )
+    if not req.colunas_y:
+        raise HTTPException(
+            status_code=400,
+            detail="Coluna(s) do eixo Y não informada(s).",
+        )
+
+    temp_dir = tempfile.gettempdir()
+    unique_id = f"{time.time()}_{os.getpid()}"
+    temp_csv = os.path.join(temp_dir, f"chart_input_{unique_id}.csv")
+    temp_png = os.path.join(temp_dir, f"chart_output_{unique_id}.png")
+
+    try:
+        df = pd.DataFrame(req.rows)
+        df.to_csv(temp_csv, index=False)
+
+        usecase = GerarGraficoUseCase.a_partir_de_arquivo(
+            caminho_csv=temp_csv,
+            tipo_grafico=req.tipo_grafico,
+            coluna_x=req.coluna_x,
+            colunas_y=req.colunas_y,
+            titulo=req.titulo or "Gráfico",
+            caminho_saida=temp_png,
+        )
+        usecase.executar()
+
+        if not os.path.exists(temp_png):
+            raise HTTPException(
+                status_code=500,
+                detail="Erro ao gerar a imagem do gráfico.",
+            )
+
+        with open(temp_png, "rb") as f:
+            png_bytes = f.read()
+
+        return Response(
+            content=png_bytes,
+            media_type="image/png",
+            headers={
+                "Content-Disposition": f'attachment; filename="{req.tipo_grafico}_grafico.png"'
+            },
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Erro interno ao renderizar gráfico: {str(e)}",
+        )
+    finally:
+        for path in [temp_csv, temp_png]:
+            if os.path.exists(path):
+                try:
+                    os.remove(path)
+                except OSError:
+                    pass
+
