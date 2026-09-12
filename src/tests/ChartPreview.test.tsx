@@ -13,7 +13,7 @@ describe('ChartPreview', () => {
     yColumn: 'vendas',
   };
 
-  it('renderiza o gráfico de barras quando a configuração é do tipo "bar"', () => {
+  it('renderiza o gráfico de barras quando a configuração é válida', () => {
     render(<ChartPreview dataset={mockDataset} config={barConfig} />);
 
     expect(screen.getByTestId('chart-preview')).toBeInTheDocument();
@@ -68,6 +68,19 @@ describe('ChartPreview', () => {
     ).toBeInTheDocument();
   });
 
+  it('exibe alerta quando a configuração é semanticamente inválida (ex: coluna Y não numérica)', () => {
+    const invalidConfig: ChartConfig = {
+      ...barConfig,
+      yColumn: 'mes',
+    };
+
+    render(<ChartPreview dataset={mockDataset} config={invalidConfig} />);
+
+    expect(screen.getByRole('alert')).toHaveTextContent(
+      /o eixo y exige uma coluna numérica/i
+    );
+  });
+
   it('renderiza mensagem informativa se o dataset não possuir linhas', () => {
     const emptyDataset = {
       ...mockDataset,
@@ -79,5 +92,22 @@ describe('ChartPreview', () => {
     expect(
       screen.getByText(/nenhum dado disponível para visualização/i)
     ).toBeInTheDocument();
+  });
+
+  it('renderiza com segurança sem exceções quando há linhas contendo valores nulos no eixo Y', () => {
+    const datasetComNull = {
+      ...mockDataset,
+      rows: [
+        { mes: 'Janeiro', vendas: 100 },
+        { mes: 'Fevereiro', vendas: null },
+        { mes: 'Março', vendas: 150 },
+      ],
+    };
+
+    expect(() => {
+      render(<ChartPreview dataset={datasetComNull} config={barConfig} />);
+    }).not.toThrow();
+
+    expect(screen.getByTestId('bar-chart')).toBeInTheDocument();
   });
 });

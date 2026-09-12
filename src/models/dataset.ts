@@ -3,8 +3,10 @@ export interface DatasetColumn {
   type: 'string' | 'number' | 'date' | 'boolean';
 }
 
+export type DatasetCellValue = string | number | boolean | null;
+
 export interface DatasetRow {
-  [key: string]: unknown;
+  [key: string]: DatasetCellValue;
 }
 
 export interface Dataset {

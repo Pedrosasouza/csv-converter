@@ -16,7 +16,7 @@ import {
   Legend,
 } from 'recharts';
 import { Dataset } from '../models/dataset';
-import { ChartConfig } from '../models/chart';
+import { ChartConfig, validateChartConfig } from '../models/chart';
 
 export interface ChartPreviewProps {
   dataset: Dataset;
@@ -28,6 +28,25 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
     return (
       <div data-testid="chart-preview">
         <p>Nenhum dado disponível para visualização.</p>
+      </div>
+    );
+  }
+
+  const validation = validateChartConfig(config, dataset);
+  if (!validation.isValid) {
+    return (
+      <div
+        data-testid="chart-preview"
+        role="alert"
+        style={{
+          marginTop: '1.5rem',
+          padding: '0.75rem',
+          backgroundColor: '#fee2e2',
+          color: '#b91c1c',
+          borderRadius: '4px',
+        }}
+      >
+        <p>{validation.error}</p>
       </div>
     );
   }

@@ -12,6 +12,10 @@ export const XAxisSelector: React.FC<XAxisSelectorProps> = ({
   value,
   onChange,
 }) => {
+  const validColumns = columns.filter((col) =>
+    ['string', 'date', 'number'].includes(col.type)
+  );
+
   return (
     <div>
       <label htmlFor="x-axis-select">Eixo X</label>
@@ -20,7 +24,7 @@ export const XAxisSelector: React.FC<XAxisSelectorProps> = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
-        {columns.map((col) => (
+        {validColumns.map((col) => (
           <option key={col.name} value={col.name}>
             {col.name}
           </option>
