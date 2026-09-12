@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { FileUpload } from '../components/FileUpload';
-import * as fileParser from '../services/fileParser';
+import * as datasetService from '../services/datasetService';
 
 describe('FileUpload Component', () => {
   it('renderiza o input de arquivo com atributos adequados para CSV', () => {
@@ -14,7 +14,7 @@ describe('FileUpload Component', () => {
     expect(input).toHaveAttribute('accept', '.csv');
   });
 
-  it('chama onDatasetLoaded quando um arquivo CSV válido é carregado', async () => {
+  it('chama uploadDataset e aciona onDatasetLoaded quando a API retorna sucesso', async () => {
     const user = userEvent.setup();
     const handleLoaded = vi.fn();
 
@@ -25,7 +25,7 @@ describe('FileUpload Component', () => {
       columns: [{ name: 'mes', type: 'string' as const }],
       rows: [{ mes: 'Janeiro' }],
     };
-    vi.spyOn(fileParser, 'parseFile').mockResolvedValueOnce(mockDataset);
+    const uploadSpy = vi.spyOn(datasetService, 'uploadDataset').mockResolvedValueOnce(mockDataset);
 
     render(<FileUpload onDatasetLoaded={handleLoaded} />);
 
@@ -35,6 +35,7 @@ describe('FileUpload Component', () => {
     await user.upload(input, file);
 
     await waitFor(() => {
+      expect(uploadSpy).toHaveBeenCalledWith(file);
       expect(handleLoaded).toHaveBeenCalledWith(mockDataset);
     });
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
@@ -76,26 +77,30 @@ describe('FileUpload Component', () => {
     expect(handleLoaded).not.toHaveBeenCalled();
   });
 
-  it('exibe alerta quando ocorre falha no processamento (arquivo corrompido)', async () => {
+  it('exibe alerta quando ocorre erro HTTP retornado pelo uploadDataset', async () => {
     const user = userEvent.setup();
     const handleLoaded = vi.fn();
+    const handleError = vi.fn();
 
-    vi.spyOn(fileParser, 'parseFile').mockRejectedValueOnce(
-      new Error('Não foi possível ler o arquivo CSV. O arquivo parece estar corrompido.')
+    vi.spyOn(datasetService, 'uploadDataset').mockRejectedValueOnce(
+      new Error('Erro 400: O arquivo CSV deve conter pelo menos uma linha de dados.')
     );
 
-    render(<FileUpload onDatasetLoaded={handleLoaded} />);
+    render(<FileUpload onDatasetLoaded={handleLoaded} onError={handleError} />);
 
     const input = screen.getByLabelText(/carregar arquivo csv/i);
-    const file = new File(['corrompido'], 'corrompido.csv', { type: 'text/csv' });
+    const file = new File(['cabecalho'], 'invalido.csv', { type: 'text/csv' });
 
     await user.upload(input, file);
 
     await waitFor(() => {
       expect(screen.getByRole('alert')).toHaveTextContent(
-        /não foi possível ler o arquivo/i
+        /O arquivo CSV deve conter pelo menos uma linha de dados/i
       );
     });
+    expect(handleError).toHaveBeenCalledWith(
+      'Erro 400: O arquivo CSV deve conter pelo menos uma linha de dados.'
+    );
     expect(handleLoaded).not.toHaveBeenCalled();
   });
 });

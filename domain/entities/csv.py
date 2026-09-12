@@ -4,10 +4,17 @@ from pandas import DataFrame
 
 
 class CsvEntidade:
-    def __init__(self, caminho_arquivo: str, delimitador: str = ",", encoding: str = "utf-8"):
+    def __init__(
+        self,
+        caminho_arquivo: str,
+        delimitador: str = ",",
+        encoding: str = "utf-8",
+        permitir_coluna_unica: bool = False,
+    ):
         self.caminho_arquivo: str = caminho_arquivo
         self.delimitador: str = delimitador
         self.encoding: str = encoding
+        self.permitir_coluna_unica: bool = permitir_coluna_unica
         self.colunas: list = []
         self.tipo_de_dados: dict = {}
         self.numero_linhas: int = 0
@@ -56,14 +63,14 @@ class CsvEntidade:
 
     def _validar_delimitador(self):
         """Se o delimitador estiver errado, o pandas costuma jogar tudo numa única coluna."""
-        if len(self.dados.columns) == 1:
+        if not self.permitir_coluna_unica and len(self.dados.columns) == 1:
             raise ValueError(
                 f"Apenas 1 coluna foi detectada com o delimitador '{self.delimitador}'. "
                 f"Verifique se o delimitador está correto (ex: ',' ou ';')."
             )
 
     def _mapear_tipos(self) -> dict:
-        """Converte os dtypes do pandas em categorias simples: numero, data, categoria."""
+        """Converte os dtypes do pandas em categorias simples: numero, data, booleano, categoria."""
         tipos = {}
         for coluna in self.dados.columns:
             dtype = self.dados[coluna].dtype
@@ -71,6 +78,8 @@ class CsvEntidade:
                 tipos[coluna] = "numero"
             elif pd.api.types.is_datetime64_any_dtype(dtype):
                 tipos[coluna] = "data"
+            elif pd.api.types.is_bool_dtype(dtype):
+                tipos[coluna] = "booleano"
             else:
                 tipos[coluna] = "categoria"
         return tipos

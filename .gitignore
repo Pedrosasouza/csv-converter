@@ -9,6 +9,10 @@ env/
 venv/
 ENV/
 
+# Arquivos gerados / Saídas de gráficos
+*.png
+grafico.png
+
 # Logs
 logs
 *.log

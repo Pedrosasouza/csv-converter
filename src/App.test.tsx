@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
-import * as fileParser from './services/fileParser';
+import * as datasetService from './services/datasetService';
 
 describe('App', () => {
   it('renderiza o título principal e as seções iniciais', () => {
@@ -76,7 +76,7 @@ describe('App', () => {
         { mes: 'Jan', vendas: 100, lucro: 20 },
       ],
     };
-    vi.spyOn(fileParser, 'parseFile').mockResolvedValueOnce(datasetComMetricas);
+    vi.spyOn(datasetService, 'uploadDataset').mockResolvedValueOnce(datasetComMetricas);
 
     render(<App />);
 
@@ -110,7 +110,7 @@ describe('App', () => {
         { ano: '2024', lucro: 7000 },
       ],
     };
-    vi.spyOn(fileParser, 'parseFile').mockResolvedValueOnce(novoDataset);
+    vi.spyOn(datasetService, 'uploadDataset').mockResolvedValueOnce(novoDataset);
 
     render(<App />);
 

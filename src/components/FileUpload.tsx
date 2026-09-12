@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dataset } from '../models/dataset';
-import { parseFile } from '../services/fileParser';
+import { uploadDataset } from '../services/datasetService';
 
 export interface FileUploadProps {
   onDatasetLoaded: (dataset: Dataset) => void;
@@ -42,11 +42,11 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     setIsLoading(true);
 
     try {
-      const dataset = await parseFile(file);
+      const dataset = await uploadDataset(file);
       onDatasetLoaded(dataset);
     } catch (err) {
       const msg =
-        err instanceof Error ? err.message : 'Erro desconhecido ao ler o arquivo.';
+        err instanceof Error ? err.message : 'Erro desconhecido ao processar o arquivo.';
       setErrorMessage(msg);
       if (onError) {
         onError(msg);
