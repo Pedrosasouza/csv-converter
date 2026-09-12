@@ -1,0 +1,13 @@
+Codigo,Produto,Categoria,Preco,Quantidade,Disponivel
+P101,Notebook Pro,Eletronicos,4500.90,25,true
+P102,Mouse Sem Fio,Acessorios,120.50,150,true
+P103,Teclado Mecanico,Acessorios,350.00,80,true
+P104,Monitor 27 4K,Eletronicos,1899.99,40,true
+P105,Cadeira Gamer,Mobiliario,1150.00,15,false
+P106,Mesa Eletrica,Mobiliario,2300.00,8,false
+P107,Headset 7.1,Acessorios,299.90,65,true
+P108,Webcam Full HD,Acessorios,210.00,90,true
+P109,SSD NVMe 1TB,Armazenamento,480.00,120,true
+P110,HD Externo 2TB,Armazenamento,390.00,45,false
+P111,Hub USB-C,Acessorios,145.00,110,true
+P112,Microfone Condensador,Audio,420.00,30,true

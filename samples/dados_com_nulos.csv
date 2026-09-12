@@ -1,0 +1,11 @@
+Setor,Funcionarios,Orcamento,Ativo
+Tecnologia,45,150000,true
+Marketing,28,,true
+Vendas,60,180000,true
+Financeiro,15,90000,
+Recursos Humanos,12,65000,true
+Logistica,50,140000,false
+Juridico,8,,true
+Operacoes,75,210000,false
+P&D,20,130000,true
+Administrativo,,50000,true

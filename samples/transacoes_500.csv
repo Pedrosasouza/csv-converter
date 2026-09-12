@@ -1,0 +1,501 @@
+TransacaoID,Data,Canal,Categoria,ValorTotal,Itens
+1,2025-02-02,Loja Fisica,Notebooks,57.35,2
+2,2025-03-03,Marketplace,Perifericos,64.7,3
+3,2025-04-04,App Mobile,Monitores,72.05,4
+4,2025-05-05,Televendas,Audio,79.4,5
+5,2025-06-06,E-commerce,Smartphones,86.75,6
+6,2025-07-07,Loja Fisica,Notebooks,94.1,7
+7,2025-08-08,Marketplace,Perifericos,101.45,8
+8,2025-09-09,App Mobile,Monitores,108.8,1
+9,2025-10-10,Televendas,Audio,116.15,2
+10,2025-11-11,E-commerce,Smartphones,123.5,3
+11,2025-12-12,Loja Fisica,Notebooks,130.85,4
+12,2025-01-13,Marketplace,Perifericos,138.2,5
+13,2025-02-14,App Mobile,Monitores,145.55,6
+14,2025-03-15,Televendas,Audio,152.9,7
+15,2025-04-16,E-commerce,Smartphones,160.25,8
+16,2025-05-17,Loja Fisica,Notebooks,167.6,1
+17,2025-06-18,Marketplace,Perifericos,174.95,2
+18,2025-07-19,App Mobile,Monitores,182.3,3
+19,2025-08-20,Televendas,Audio,189.65,4
+20,2025-09-21,E-commerce,Smartphones,197.0,5
+21,2025-10-22,Loja Fisica,Notebooks,204.35,6
+22,2025-11-23,Marketplace,Perifericos,211.7,7
+23,2025-12-24,App Mobile,Monitores,219.05,8
+24,2025-01-25,Televendas,Audio,226.4,1
+25,2025-02-26,E-commerce,Smartphones,233.75,2
+26,2025-03-27,Loja Fisica,Notebooks,241.1,3
+27,2025-04-28,Marketplace,Perifericos,248.45,4
+28,2025-05-01,App Mobile,Monitores,255.8,5
+29,2025-06-02,Televendas,Audio,263.15,6
+30,2025-07-03,E-commerce,Smartphones,270.5,7
+31,2025-08-04,Loja Fisica,Notebooks,277.85,8
+32,2025-09-05,Marketplace,Perifericos,285.2,1
+33,2025-10-06,App Mobile,Monitores,292.55,2
+34,2025-11-07,Televendas,Audio,299.9,3
+35,2025-12-08,E-commerce,Smartphones,307.25,4
+36,2025-01-09,Loja Fisica,Notebooks,314.6,5
+37,2025-02-10,Marketplace,Perifericos,321.95,6
+38,2025-03-11,App Mobile,Monitores,329.3,7
+39,2025-04-12,Televendas,Audio,336.65,8
+40,2025-05-13,E-commerce,Smartphones,344.0,1
+41,2025-06-14,Loja Fisica,Notebooks,351.35,2
+42,2025-07-15,Marketplace,Perifericos,358.7,3
+43,2025-08-16,App Mobile,Monitores,366.05,4
+44,2025-09-17,Televendas,Audio,373.4,5
+45,2025-10-18,E-commerce,Smartphones,380.75,6
+46,2025-11-19,Loja Fisica,Notebooks,388.1,7
+47,2025-12-20,Marketplace,Perifericos,395.45,8
+48,2025-01-21,App Mobile,Monitores,402.8,1
+49,2025-02-22,Televendas,Audio,410.15,2
+50,2025-03-23,E-commerce,Smartphones,417.5,3
+51,2025-04-24,Loja Fisica,Notebooks,424.85,4
+52,2025-05-25,Marketplace,Perifericos,432.2,5
+53,2025-06-26,App Mobile,Monitores,439.55,6
+54,2025-07-27,Televendas,Audio,446.9,7
+55,2025-08-28,E-commerce,Smartphones,454.25,8
+56,2025-09-01,Loja Fisica,Notebooks,461.6,1
+57,2025-10-02,Marketplace,Perifericos,468.95,2
+58,2025-11-03,App Mobile,Monitores,476.3,3
+59,2025-12-04,Televendas,Audio,483.65,4
+60,2025-01-05,E-commerce,Smartphones,491.0,5
+61,2025-02-06,Loja Fisica,Notebooks,498.35,6
+62,2025-03-07,Marketplace,Perifericos,505.7,7
+63,2025-04-08,App Mobile,Monitores,513.05,8
+64,2025-05-09,Televendas,Audio,520.4,1
+65,2025-06-10,E-commerce,Smartphones,527.75,2
+66,2025-07-11,Loja Fisica,Notebooks,535.1,3
+67,2025-08-12,Marketplace,Perifericos,542.45,4
+68,2025-09-13,App Mobile,Monitores,549.8,5
+69,2025-10-14,Televendas,Audio,557.15,6
+70,2025-11-15,E-commerce,Smartphones,564.5,7
+71,2025-12-16,Loja Fisica,Notebooks,571.85,8
+72,2025-01-17,Marketplace,Perifericos,579.2,1
+73,2025-02-18,App Mobile,Monitores,586.55,2
+74,2025-03-19,Televendas,Audio,593.9,3
+75,2025-04-20,E-commerce,Smartphones,601.25,4
+76,2025-05-21,Loja Fisica,Notebooks,608.6,5
+77,2025-06-22,Marketplace,Perifericos,615.95,6
+78,2025-07-23,App Mobile,Monitores,623.3,7
+79,2025-08-24,Televendas,Audio,630.65,8
+80,2025-09-25,E-commerce,Smartphones,638.0,1
+81,2025-10-26,Loja Fisica,Notebooks,645.35,2
+82,2025-11-27,Marketplace,Perifericos,652.7,3
+83,2025-12-28,App Mobile,Monitores,660.05,4
+84,2025-01-01,Televendas,Audio,667.4,5
+85,2025-02-02,E-commerce,Smartphones,674.75,6
+86,2025-03-03,Loja Fisica,Notebooks,682.1,7
+87,2025-04-04,Marketplace,Perifericos,689.45,8
+88,2025-05-05,App Mobile,Monitores,696.8,1
+89,2025-06-06,Televendas,Audio,704.15,2
+90,2025-07-07,E-commerce,Smartphones,711.5,3
+91,2025-08-08,Loja Fisica,Notebooks,718.85,4
+92,2025-09-09,Marketplace,Perifericos,726.2,5
+93,2025-10-10,App Mobile,Monitores,733.55,6
+94,2025-11-11,Televendas,Audio,740.9,7
+95,2025-12-12,E-commerce,Smartphones,748.25,8
+96,2025-01-13,Loja Fisica,Notebooks,755.6,1
+97,2025-02-14,Marketplace,Perifericos,762.95,2
+98,2025-03-15,App Mobile,Monitores,770.3,3
+99,2025-04-16,Televendas,Audio,777.65,4
+100,2025-05-17,E-commerce,Smartphones,785.0,5
+101,2025-06-18,Loja Fisica,Notebooks,792.35,6
+102,2025-07-19,Marketplace,Perifericos,799.7,7
+103,2025-08-20,App Mobile,Monitores,807.05,8
+104,2025-09-21,Televendas,Audio,814.4,1
+105,2025-10-22,E-commerce,Smartphones,821.75,2
+106,2025-11-23,Loja Fisica,Notebooks,829.1,3
+107,2025-12-24,Marketplace,Perifericos,836.45,4
+108,2025-01-25,App Mobile,Monitores,843.8,5
+109,2025-02-26,Televendas,Audio,851.15,6
+110,2025-03-27,E-commerce,Smartphones,858.5,7
+111,2025-04-28,Loja Fisica,Notebooks,865.85,8
+112,2025-05-01,Marketplace,Perifericos,873.2,1
+113,2025-06-02,App Mobile,Monitores,880.55,2
+114,2025-07-03,Televendas,Audio,887.9,3
+115,2025-08-04,E-commerce,Smartphones,895.25,4
+116,2025-09-05,Loja Fisica,Notebooks,902.6,5
+117,2025-10-06,Marketplace,Perifericos,909.95,6
+118,2025-11-07,App Mobile,Monitores,917.3,7
+119,2025-12-08,Televendas,Audio,924.65,8
+120,2025-01-09,E-commerce,Smartphones,932.0,1
+121,2025-02-10,Loja Fisica,Notebooks,939.35,2
+122,2025-03-11,Marketplace,Perifericos,946.7,3
+123,2025-04-12,App Mobile,Monitores,954.05,4
+124,2025-05-13,Televendas,Audio,961.4,5
+125,2025-06-14,E-commerce,Smartphones,968.75,6
+126,2025-07-15,Loja Fisica,Notebooks,976.1,7
+127,2025-08-16,Marketplace,Perifericos,983.45,8
+128,2025-09-17,App Mobile,Monitores,990.8,1
+129,2025-10-18,Televendas,Audio,998.15,2
+130,2025-11-19,E-commerce,Smartphones,1005.5,3
+131,2025-12-20,Loja Fisica,Notebooks,1012.85,4
+132,2025-01-21,Marketplace,Perifericos,1020.2,5
+133,2025-02-22,App Mobile,Monitores,1027.55,6
+134,2025-03-23,Televendas,Audio,1034.9,7
+135,2025-04-24,E-commerce,Smartphones,1042.25,8
+136,2025-05-25,Loja Fisica,Notebooks,1049.6,1
+137,2025-06-26,Marketplace,Perifericos,1056.95,2
+138,2025-07-27,App Mobile,Monitores,1064.3,3
+139,2025-08-28,Televendas,Audio,1071.65,4
+140,2025-09-01,E-commerce,Smartphones,1079.0,5
+141,2025-10-02,Loja Fisica,Notebooks,1086.35,6
+142,2025-11-03,Marketplace,Perifericos,1093.7,7
+143,2025-12-04,App Mobile,Monitores,1101.05,8
+144,2025-01-05,Televendas,Audio,1108.4,1
+145,2025-02-06,E-commerce,Smartphones,1115.75,2
+146,2025-03-07,Loja Fisica,Notebooks,1123.1,3
+147,2025-04-08,Marketplace,Perifericos,1130.45,4
+148,2025-05-09,App Mobile,Monitores,1137.8,5
+149,2025-06-10,Televendas,Audio,1145.15,6
+150,2025-07-11,E-commerce,Smartphones,1152.5,7
+151,2025-08-12,Loja Fisica,Notebooks,1159.85,8
+152,2025-09-13,Marketplace,Perifericos,1167.2,1
+153,2025-10-14,App Mobile,Monitores,1174.55,2
+154,2025-11-15,Televendas,Audio,1181.9,3
+155,2025-12-16,E-commerce,Smartphones,1189.25,4
+156,2025-01-17,Loja Fisica,Notebooks,1196.6,5
+157,2025-02-18,Marketplace,Perifericos,1203.95,6
+158,2025-03-19,App Mobile,Monitores,1211.3,7
+159,2025-04-20,Televendas,Audio,1218.65,8
+160,2025-05-21,E-commerce,Smartphones,1226.0,1
+161,2025-06-22,Loja Fisica,Notebooks,1233.35,2
+162,2025-07-23,Marketplace,Perifericos,1240.7,3
+163,2025-08-24,App Mobile,Monitores,1248.05,4
+164,2025-09-25,Televendas,Audio,1255.4,5
+165,2025-10-26,E-commerce,Smartphones,1262.75,6
+166,2025-11-27,Loja Fisica,Notebooks,1270.1,7
+167,2025-12-28,Marketplace,Perifericos,1277.45,8
+168,2025-01-01,App Mobile,Monitores,1284.8,1
+169,2025-02-02,Televendas,Audio,1292.15,2
+170,2025-03-03,E-commerce,Smartphones,1299.5,3
+171,2025-04-04,Loja Fisica,Notebooks,1306.85,4
+172,2025-05-05,Marketplace,Perifericos,1314.2,5
+173,2025-06-06,App Mobile,Monitores,1321.55,6
+174,2025-07-07,Televendas,Audio,1328.9,7
+175,2025-08-08,E-commerce,Smartphones,1336.25,8
+176,2025-09-09,Loja Fisica,Notebooks,1343.6,1
+177,2025-10-10,Marketplace,Perifericos,1350.95,2
+178,2025-11-11,App Mobile,Monitores,1358.3,3
+179,2025-12-12,Televendas,Audio,1365.65,4
+180,2025-01-13,E-commerce,Smartphones,1373.0,5
+181,2025-02-14,Loja Fisica,Notebooks,1380.35,6
+182,2025-03-15,Marketplace,Perifericos,1387.7,7
+183,2025-04-16,App Mobile,Monitores,1395.05,8
+184,2025-05-17,Televendas,Audio,1402.4,1
+185,2025-06-18,E-commerce,Smartphones,1409.75,2
+186,2025-07-19,Loja Fisica,Notebooks,1417.1,3
+187,2025-08-20,Marketplace,Perifericos,1424.45,4
+188,2025-09-21,App Mobile,Monitores,1431.8,5
+189,2025-10-22,Televendas,Audio,1439.15,6
+190,2025-11-23,E-commerce,Smartphones,1446.5,7
+191,2025-12-24,Loja Fisica,Notebooks,1453.85,8
+192,2025-01-25,Marketplace,Perifericos,1461.2,1
+193,2025-02-26,App Mobile,Monitores,1468.55,2
+194,2025-03-27,Televendas,Audio,1475.9,3
+195,2025-04-28,E-commerce,Smartphones,1483.25,4
+196,2025-05-01,Loja Fisica,Notebooks,1490.6,5
+197,2025-06-02,Marketplace,Perifericos,1497.95,6
+198,2025-07-03,App Mobile,Monitores,1505.3,7
+199,2025-08-04,Televendas,Audio,1512.65,8
+200,2025-09-05,E-commerce,Smartphones,1520.0,1
+201,2025-10-06,Loja Fisica,Notebooks,1527.35,2
+202,2025-11-07,Marketplace,Perifericos,1534.7,3
+203,2025-12-08,App Mobile,Monitores,1542.05,4
+204,2025-01-09,Televendas,Audio,1549.4,5
+205,2025-02-10,E-commerce,Smartphones,1556.75,6
+206,2025-03-11,Loja Fisica,Notebooks,1564.1,7
+207,2025-04-12,Marketplace,Perifericos,1571.45,8
+208,2025-05-13,App Mobile,Monitores,1578.8,1
+209,2025-06-14,Televendas,Audio,1586.15,2
+210,2025-07-15,E-commerce,Smartphones,1593.5,3
+211,2025-08-16,Loja Fisica,Notebooks,1600.85,4
+212,2025-09-17,Marketplace,Perifericos,1608.2,5
+213,2025-10-18,App Mobile,Monitores,1615.55,6
+214,2025-11-19,Televendas,Audio,1622.9,7
+215,2025-12-20,E-commerce,Smartphones,1630.25,8
+216,2025-01-21,Loja Fisica,Notebooks,1637.6,1
+217,2025-02-22,Marketplace,Perifericos,1644.95,2
+218,2025-03-23,App Mobile,Monitores,1652.3,3
+219,2025-04-24,Televendas,Audio,1659.65,4
+220,2025-05-25,E-commerce,Smartphones,1667.0,5
+221,2025-06-26,Loja Fisica,Notebooks,1674.35,6
+222,2025-07-27,Marketplace,Perifericos,1681.7,7
+223,2025-08-28,App Mobile,Monitores,1689.05,8
+224,2025-09-01,Televendas,Audio,1696.4,1
+225,2025-10-02,E-commerce,Smartphones,1703.75,2
+226,2025-11-03,Loja Fisica,Notebooks,1711.1,3
+227,2025-12-04,Marketplace,Perifericos,1718.45,4
+228,2025-01-05,App Mobile,Monitores,1725.8,5
+229,2025-02-06,Televendas,Audio,1733.15,6
+230,2025-03-07,E-commerce,Smartphones,1740.5,7
+231,2025-04-08,Loja Fisica,Notebooks,1747.85,8
+232,2025-05-09,Marketplace,Perifericos,1755.2,1
+233,2025-06-10,App Mobile,Monitores,1762.55,2
+234,2025-07-11,Televendas,Audio,1769.9,3
+235,2025-08-12,E-commerce,Smartphones,1777.25,4
+236,2025-09-13,Loja Fisica,Notebooks,1784.6,5
+237,2025-10-14,Marketplace,Perifericos,1791.95,6
+238,2025-11-15,App Mobile,Monitores,1799.3,7
+239,2025-12-16,Televendas,Audio,1806.65,8
+240,2025-01-17,E-commerce,Smartphones,1814.0,1
+241,2025-02-18,Loja Fisica,Notebooks,1821.35,2
+242,2025-03-19,Marketplace,Perifericos,1828.7,3
+243,2025-04-20,App Mobile,Monitores,1836.05,4
+244,2025-05-21,Televendas,Audio,1843.4,5
+245,2025-06-22,E-commerce,Smartphones,1850.75,6
+246,2025-07-23,Loja Fisica,Notebooks,1858.1,7
+247,2025-08-24,Marketplace,Perifericos,1865.45,8
+248,2025-09-25,App Mobile,Monitores,1872.8,1
+249,2025-10-26,Televendas,Audio,1880.15,2
+250,2025-11-27,E-commerce,Smartphones,1887.5,3
+251,2025-12-28,Loja Fisica,Notebooks,1894.85,4
+252,2025-01-01,Marketplace,Perifericos,52.2,5
+253,2025-02-02,App Mobile,Monitores,59.55,6
+254,2025-03-03,Televendas,Audio,66.9,7
+255,2025-04-04,E-commerce,Smartphones,74.25,8
+256,2025-05-05,Loja Fisica,Notebooks,81.6,1
+257,2025-06-06,Marketplace,Perifericos,88.95,2
+258,2025-07-07,App Mobile,Monitores,96.3,3
+259,2025-08-08,Televendas,Audio,103.65,4
+260,2025-09-09,E-commerce,Smartphones,111.0,5
+261,2025-10-10,Loja Fisica,Notebooks,118.35,6
+262,2025-11-11,Marketplace,Perifericos,125.7,7
+263,2025-12-12,App Mobile,Monitores,133.05,8
+264,2025-01-13,Televendas,Audio,140.4,1
+265,2025-02-14,E-commerce,Smartphones,147.75,2
+266,2025-03-15,Loja Fisica,Notebooks,155.1,3
+267,2025-04-16,Marketplace,Perifericos,162.45,4
+268,2025-05-17,App Mobile,Monitores,169.8,5
+269,2025-06-18,Televendas,Audio,177.15,6
+270,2025-07-19,E-commerce,Smartphones,184.5,7
+271,2025-08-20,Loja Fisica,Notebooks,191.85,8
+272,2025-09-21,Marketplace,Perifericos,199.2,1
+273,2025-10-22,App Mobile,Monitores,206.55,2
+274,2025-11-23,Televendas,Audio,213.9,3
+275,2025-12-24,E-commerce,Smartphones,221.25,4
+276,2025-01-25,Loja Fisica,Notebooks,228.6,5
+277,2025-02-26,Marketplace,Perifericos,235.95,6
+278,2025-03-27,App Mobile,Monitores,243.3,7
+279,2025-04-28,Televendas,Audio,250.65,8
+280,2025-05-01,E-commerce,Smartphones,258.0,1
+281,2025-06-02,Loja Fisica,Notebooks,265.35,2
+282,2025-07-03,Marketplace,Perifericos,272.7,3
+283,2025-08-04,App Mobile,Monitores,280.05,4
+284,2025-09-05,Televendas,Audio,287.4,5
+285,2025-10-06,E-commerce,Smartphones,294.75,6
+286,2025-11-07,Loja Fisica,Notebooks,302.1,7
+287,2025-12-08,Marketplace,Perifericos,309.45,8
+288,2025-01-09,App Mobile,Monitores,316.8,1
+289,2025-02-10,Televendas,Audio,324.15,2
+290,2025-03-11,E-commerce,Smartphones,331.5,3
+291,2025-04-12,Loja Fisica,Notebooks,338.85,4
+292,2025-05-13,Marketplace,Perifericos,346.2,5
+293,2025-06-14,App Mobile,Monitores,353.55,6
+294,2025-07-15,Televendas,Audio,360.9,7
+295,2025-08-16,E-commerce,Smartphones,368.25,8
+296,2025-09-17,Loja Fisica,Notebooks,375.6,1
+297,2025-10-18,Marketplace,Perifericos,382.95,2
+298,2025-11-19,App Mobile,Monitores,390.3,3
+299,2025-12-20,Televendas,Audio,397.65,4
+300,2025-01-21,E-commerce,Smartphones,405.0,5
+301,2025-02-22,Loja Fisica,Notebooks,412.35,6
+302,2025-03-23,Marketplace,Perifericos,419.7,7
+303,2025-04-24,App Mobile,Monitores,427.05,8
+304,2025-05-25,Televendas,Audio,434.4,1
+305,2025-06-26,E-commerce,Smartphones,441.75,2
+306,2025-07-27,Loja Fisica,Notebooks,449.1,3
+307,2025-08-28,Marketplace,Perifericos,456.45,4
+308,2025-09-01,App Mobile,Monitores,463.8,5
+309,2025-10-02,Televendas,Audio,471.15,6
+310,2025-11-03,E-commerce,Smartphones,478.5,7
+311,2025-12-04,Loja Fisica,Notebooks,485.85,8
+312,2025-01-05,Marketplace,Perifericos,493.2,1
+313,2025-02-06,App Mobile,Monitores,500.55,2
+314,2025-03-07,Televendas,Audio,507.9,3
+315,2025-04-08,E-commerce,Smartphones,515.25,4
+316,2025-05-09,Loja Fisica,Notebooks,522.6,5
+317,2025-06-10,Marketplace,Perifericos,529.95,6
+318,2025-07-11,App Mobile,Monitores,537.3,7
+319,2025-08-12,Televendas,Audio,544.65,8
+320,2025-09-13,E-commerce,Smartphones,552.0,1
+321,2025-10-14,Loja Fisica,Notebooks,559.35,2
+322,2025-11-15,Marketplace,Perifericos,566.7,3
+323,2025-12-16,App Mobile,Monitores,574.05,4
+324,2025-01-17,Televendas,Audio,581.4,5
+325,2025-02-18,E-commerce,Smartphones,588.75,6
+326,2025-03-19,Loja Fisica,Notebooks,596.1,7
+327,2025-04-20,Marketplace,Perifericos,603.45,8
+328,2025-05-21,App Mobile,Monitores,610.8,1
+329,2025-06-22,Televendas,Audio,618.15,2
+330,2025-07-23,E-commerce,Smartphones,625.5,3
+331,2025-08-24,Loja Fisica,Notebooks,632.85,4
+332,2025-09-25,Marketplace,Perifericos,640.2,5
+333,2025-10-26,App Mobile,Monitores,647.55,6
+334,2025-11-27,Televendas,Audio,654.9,7
+335,2025-12-28,E-commerce,Smartphones,662.25,8
+336,2025-01-01,Loja Fisica,Notebooks,669.6,1
+337,2025-02-02,Marketplace,Perifericos,676.95,2
+338,2025-03-03,App Mobile,Monitores,684.3,3
+339,2025-04-04,Televendas,Audio,691.65,4
+340,2025-05-05,E-commerce,Smartphones,699.0,5
+341,2025-06-06,Loja Fisica,Notebooks,706.35,6
+342,2025-07-07,Marketplace,Perifericos,713.7,7
+343,2025-08-08,App Mobile,Monitores,721.05,8
+344,2025-09-09,Televendas,Audio,728.4,1
+345,2025-10-10,E-commerce,Smartphones,735.75,2
+346,2025-11-11,Loja Fisica,Notebooks,743.1,3
+347,2025-12-12,Marketplace,Perifericos,750.45,4
+348,2025-01-13,App Mobile,Monitores,757.8,5
+349,2025-02-14,Televendas,Audio,765.15,6
+350,2025-03-15,E-commerce,Smartphones,772.5,7
+351,2025-04-16,Loja Fisica,Notebooks,779.85,8
+352,2025-05-17,Marketplace,Perifericos,787.2,1
+353,2025-06-18,App Mobile,Monitores,794.55,2
+354,2025-07-19,Televendas,Audio,801.9,3
+355,2025-08-20,E-commerce,Smartphones,809.25,4
+356,2025-09-21,Loja Fisica,Notebooks,816.6,5
+357,2025-10-22,Marketplace,Perifericos,823.95,6
+358,2025-11-23,App Mobile,Monitores,831.3,7
+359,2025-12-24,Televendas,Audio,838.65,8
+360,2025-01-25,E-commerce,Smartphones,846.0,1
+361,2025-02-26,Loja Fisica,Notebooks,853.35,2
+362,2025-03-27,Marketplace,Perifericos,860.7,3
+363,2025-04-28,App Mobile,Monitores,868.05,4
+364,2025-05-01,Televendas,Audio,875.4,5
+365,2025-06-02,E-commerce,Smartphones,882.75,6
+366,2025-07-03,Loja Fisica,Notebooks,890.1,7
+367,2025-08-04,Marketplace,Perifericos,897.45,8
+368,2025-09-05,App Mobile,Monitores,904.8,1
+369,2025-10-06,Televendas,Audio,912.15,2
+370,2025-11-07,E-commerce,Smartphones,919.5,3
+371,2025-12-08,Loja Fisica,Notebooks,926.85,4
+372,2025-01-09,Marketplace,Perifericos,934.2,5
+373,2025-02-10,App Mobile,Monitores,941.55,6
+374,2025-03-11,Televendas,Audio,948.9,7
+375,2025-04-12,E-commerce,Smartphones,956.25,8
+376,2025-05-13,Loja Fisica,Notebooks,963.6,1
+377,2025-06-14,Marketplace,Perifericos,970.95,2
+378,2025-07-15,App Mobile,Monitores,978.3,3
+379,2025-08-16,Televendas,Audio,985.65,4
+380,2025-09-17,E-commerce,Smartphones,993.0,5
+381,2025-10-18,Loja Fisica,Notebooks,1000.35,6
+382,2025-11-19,Marketplace,Perifericos,1007.7,7
+383,2025-12-20,App Mobile,Monitores,1015.05,8
+384,2025-01-21,Televendas,Audio,1022.4,1
+385,2025-02-22,E-commerce,Smartphones,1029.75,2
+386,2025-03-23,Loja Fisica,Notebooks,1037.1,3
+387,2025-04-24,Marketplace,Perifericos,1044.45,4
+388,2025-05-25,App Mobile,Monitores,1051.8,5
+389,2025-06-26,Televendas,Audio,1059.15,6
+390,2025-07-27,E-commerce,Smartphones,1066.5,7
+391,2025-08-28,Loja Fisica,Notebooks,1073.85,8
+392,2025-09-01,Marketplace,Perifericos,1081.2,1
+393,2025-10-02,App Mobile,Monitores,1088.55,2
+394,2025-11-03,Televendas,Audio,1095.9,3
+395,2025-12-04,E-commerce,Smartphones,1103.25,4
+396,2025-01-05,Loja Fisica,Notebooks,1110.6,5
+397,2025-02-06,Marketplace,Perifericos,1117.95,6
+398,2025-03-07,App Mobile,Monitores,1125.3,7
+399,2025-04-08,Televendas,Audio,1132.65,8
+400,2025-05-09,E-commerce,Smartphones,1140.0,1
+401,2025-06-10,Loja Fisica,Notebooks,1147.35,2
+402,2025-07-11,Marketplace,Perifericos,1154.7,3
+403,2025-08-12,App Mobile,Monitores,1162.05,4
+404,2025-09-13,Televendas,Audio,1169.4,5
+405,2025-10-14,E-commerce,Smartphones,1176.75,6
+406,2025-11-15,Loja Fisica,Notebooks,1184.1,7
+407,2025-12-16,Marketplace,Perifericos,1191.45,8
+408,2025-01-17,App Mobile,Monitores,1198.8,1
+409,2025-02-18,Televendas,Audio,1206.15,2
+410,2025-03-19,E-commerce,Smartphones,1213.5,3
+411,2025-04-20,Loja Fisica,Notebooks,1220.85,4
+412,2025-05-21,Marketplace,Perifericos,1228.2,5
+413,2025-06-22,App Mobile,Monitores,1235.55,6
+414,2025-07-23,Televendas,Audio,1242.9,7
+415,2025-08-24,E-commerce,Smartphones,1250.25,8
+416,2025-09-25,Loja Fisica,Notebooks,1257.6,1
+417,2025-10-26,Marketplace,Perifericos,1264.95,2
+418,2025-11-27,App Mobile,Monitores,1272.3,3
+419,2025-12-28,Televendas,Audio,1279.65,4
+420,2025-01-01,E-commerce,Smartphones,1287.0,5
+421,2025-02-02,Loja Fisica,Notebooks,1294.35,6
+422,2025-03-03,Marketplace,Perifericos,1301.7,7
+423,2025-04-04,App Mobile,Monitores,1309.05,8
+424,2025-05-05,Televendas,Audio,1316.4,1
+425,2025-06-06,E-commerce,Smartphones,1323.75,2
+426,2025-07-07,Loja Fisica,Notebooks,1331.1,3
+427,2025-08-08,Marketplace,Perifericos,1338.45,4
+428,2025-09-09,App Mobile,Monitores,1345.8,5
+429,2025-10-10,Televendas,Audio,1353.15,6
+430,2025-11-11,E-commerce,Smartphones,1360.5,7
+431,2025-12-12,Loja Fisica,Notebooks,1367.85,8
+432,2025-01-13,Marketplace,Perifericos,1375.2,1
+433,2025-02-14,App Mobile,Monitores,1382.55,2
+434,2025-03-15,Televendas,Audio,1389.9,3
+435,2025-04-16,E-commerce,Smartphones,1397.25,4
+436,2025-05-17,Loja Fisica,Notebooks,1404.6,5
+437,2025-06-18,Marketplace,Perifericos,1411.95,6
+438,2025-07-19,App Mobile,Monitores,1419.3,7
+439,2025-08-20,Televendas,Audio,1426.65,8
+440,2025-09-21,E-commerce,Smartphones,1434.0,1
+441,2025-10-22,Loja Fisica,Notebooks,1441.35,2
+442,2025-11-23,Marketplace,Perifericos,1448.7,3
+443,2025-12-24,App Mobile,Monitores,1456.05,4
+444,2025-01-25,Televendas,Audio,1463.4,5
+445,2025-02-26,E-commerce,Smartphones,1470.75,6
+446,2025-03-27,Loja Fisica,Notebooks,1478.1,7
+447,2025-04-28,Marketplace,Perifericos,1485.45,8
+448,2025-05-01,App Mobile,Monitores,1492.8,1
+449,2025-06-02,Televendas,Audio,1500.15,2
+450,2025-07-03,E-commerce,Smartphones,1507.5,3
+451,2025-08-04,Loja Fisica,Notebooks,1514.85,4
+452,2025-09-05,Marketplace,Perifericos,1522.2,5
+453,2025-10-06,App Mobile,Monitores,1529.55,6
+454,2025-11-07,Televendas,Audio,1536.9,7
+455,2025-12-08,E-commerce,Smartphones,1544.25,8
+456,2025-01-09,Loja Fisica,Notebooks,1551.6,1
+457,2025-02-10,Marketplace,Perifericos,1558.95,2
+458,2025-03-11,App Mobile,Monitores,1566.3,3
+459,2025-04-12,Televendas,Audio,1573.65,4
+460,2025-05-13,E-commerce,Smartphones,1581.0,5
+461,2025-06-14,Loja Fisica,Notebooks,1588.35,6
+462,2025-07-15,Marketplace,Perifericos,1595.7,7
+463,2025-08-16,App Mobile,Monitores,1603.05,8
+464,2025-09-17,Televendas,Audio,1610.4,1
+465,2025-10-18,E-commerce,Smartphones,1617.75,2
+466,2025-11-19,Loja Fisica,Notebooks,1625.1,3
+467,2025-12-20,Marketplace,Perifericos,1632.45,4
+468,2025-01-21,App Mobile,Monitores,1639.8,5
+469,2025-02-22,Televendas,Audio,1647.15,6
+470,2025-03-23,E-commerce,Smartphones,1654.5,7
+471,2025-04-24,Loja Fisica,Notebooks,1661.85,8
+472,2025-05-25,Marketplace,Perifericos,1669.2,1
+473,2025-06-26,App Mobile,Monitores,1676.55,2
+474,2025-07-27,Televendas,Audio,1683.9,3
+475,2025-08-28,E-commerce,Smartphones,1691.25,4
+476,2025-09-01,Loja Fisica,Notebooks,1698.6,5
+477,2025-10-02,Marketplace,Perifericos,1705.95,6
+478,2025-11-03,App Mobile,Monitores,1713.3,7
+479,2025-12-04,Televendas,Audio,1720.65,8
+480,2025-01-05,E-commerce,Smartphones,1728.0,1
+481,2025-02-06,Loja Fisica,Notebooks,1735.35,2
+482,2025-03-07,Marketplace,Perifericos,1742.7,3
+483,2025-04-08,App Mobile,Monitores,1750.05,4
+484,2025-05-09,Televendas,Audio,1757.4,5
+485,2025-06-10,E-commerce,Smartphones,1764.75,6
+486,2025-07-11,Loja Fisica,Notebooks,1772.1,7
+487,2025-08-12,Marketplace,Perifericos,1779.45,8
+488,2025-09-13,App Mobile,Monitores,1786.8,1
+489,2025-10-14,Televendas,Audio,1794.15,2
+490,2025-11-15,E-commerce,Smartphones,1801.5,3
+491,2025-12-16,Loja Fisica,Notebooks,1808.85,4
+492,2025-01-17,Marketplace,Perifericos,1816.2,5
+493,2025-02-18,App Mobile,Monitores,1823.55,6
+494,2025-03-19,Televendas,Audio,1830.9,7
+495,2025-04-20,E-commerce,Smartphones,1838.25,8
+496,2025-05-21,Loja Fisica,Notebooks,1845.6,1
+497,2025-06-22,Marketplace,Perifericos,1852.95,2
+498,2025-07-23,App Mobile,Monitores,1860.3,3
+499,2025-08-24,Televendas,Audio,1867.65,4
+500,2025-09-25,E-commerce,Smartphones,1875.0,5
