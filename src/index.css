@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gb-50: #fdfdfd;
+  --color-gb-100: #f6f8fa;
+  --color-gb-200: #ebecf2;
+  --color-gb-300: #d8dae7;
+  --color-gb-400: #b7bcda;
+  --color-gb-500: #7881bb;
+  --color-gb-600: #5862a5;
+  --color-gb-700: #495084;
+  --color-gb-800: #414873;
+  --color-gb-900: #323a5a;
+  --color-gb-950: #1c1e2c;
+}
+
+@layer base {
+  body {
+    background-color: #f6f8fa;
+    color: #1c1e2c;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+}
