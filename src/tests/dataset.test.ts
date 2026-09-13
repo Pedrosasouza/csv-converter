@@ -3,7 +3,7 @@ import { mockDataset } from '../mocks/datasetMock';
 import { ChartConfig, validateChartConfig } from '../models/chart';
 import { DatasetRow } from '../models/dataset';
 import { getDataset } from '../services/datasetService';
-import { isDateString } from '../services/fileParser';
+import { isDateString } from '../utils/date';
 
 describe('Dataset Models and Mock - Validação de Contrato Estrutural', () => {
   it('as colunas do Dataset possuem nomes únicos e tipos válidos', () => {

@@ -24,9 +24,6 @@ export default defineConfig({
             if (id.includes('d3') || id.includes('victory-vendor')) {
               return 'd3-vendor';
             }
-            if (id.includes('papaparse')) {
-              return 'parser';
-            }
             return 'vendor';
           }
         },
