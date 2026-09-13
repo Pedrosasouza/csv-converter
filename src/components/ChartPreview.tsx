@@ -79,19 +79,72 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
 
   const validation = validateChartConfig(config, dataset);
   if (!validation.isValid) {
+    const isPending =
+      validation.reason === 'missing_x' || validation.reason === 'missing_y';
+    const isNoNumeric = validation.reason === 'no_numeric_columns';
+
+    const title = isPending
+      ? 'Configuração Pendente'
+      : isNoNumeric
+      ? 'Ausência de Colunas Numéricas'
+      : 'Erro na Configuração';
+
+    const cardBg = isPending
+      ? 'bg-[#f6f8fa] border-[#d8dae7]'
+      : 'bg-red-50/40 border-red-200';
+    const titleColor = isPending ? 'text-[#323a5a]' : 'text-red-800';
+    const textColor = isPending ? 'text-[#414873]' : 'text-red-600';
+    const iconColor = isPending ? 'text-[#5862a5]' : 'text-red-500';
+
     return (
       <div
         data-testid="chart-preview"
         role="alert"
-        className="bg-white rounded-2xl border border-red-200 shadow-sm p-6 text-red-700 bg-red-50/40 space-y-2"
+        className={`rounded-2xl border shadow-sm p-6 lg:p-8 space-y-2.5 transition-all ${cardBg}`}
       >
-        <div className="flex items-center gap-2 font-semibold text-red-800 text-sm">
-          <svg className="w-5 h-5 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
-          <span>Erro na Configuração</span>
+        <div className={`flex items-center gap-2 font-semibold text-sm ${titleColor}`}>
+          {isPending ? (
+            <svg
+              className={`w-5 h-5 shrink-0 ${iconColor}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          ) : (
+            <svg
+              className={`w-5 h-5 shrink-0 ${iconColor}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+          )}
+          <span>{title}</span>
         </div>
-        <p className="text-xs text-red-600 font-medium pl-7">{validation.error}</p>
+        <p className={`text-xs font-medium pl-7 leading-relaxed ${textColor}`}>
+          {validation.error}
+        </p>
+        <div className="pl-7 pt-1 text-[11px] text-[#495084]">
+          {isPending &&
+            'Dica: Utilize o painel lateral de configuração para selecionar os eixos X e Y desejados.'}
+          {isNoNumeric &&
+            'Dica: O gráfico precisa de ao menos uma coluna com números (ex.: valores, contagens, quantidades) para plotar o eixo Y.'}
+          {validation.reason === 'empty_column_data' &&
+            'Dica: Selecione outra coluna numérica que possua dados preenchidos no dataset.'}
+        </div>
       </div>
     );
   }

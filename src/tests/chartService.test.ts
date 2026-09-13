@@ -105,4 +105,20 @@ describe('chartService', () => {
       'Erro ao gerar a imagem do gráfico no servidor.'
     );
   });
+
+  it('exportChartAsPng rejeita imediatamente sem chamar a API quando a configuração for inválida', async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+
+    const invalidConfig = {
+      ...mockConfig,
+      yColumn: 'Mes', // coluna texto, inválida para Y
+    };
+
+    await expect(exportChartAsPng(invalidConfig, mockDataset)).rejects.toThrow(
+      /o eixo y exige uma coluna numérica/i
+    );
+
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
 });

@@ -152,4 +152,57 @@ describe('ChartPreview', () => {
 
     exportSpy.mockRestore();
   });
+
+  it('exibe aviso amigável de configuração pendente quando o eixo X não foi selecionado', () => {
+    const pendingConfig: ChartConfig = {
+      ...barConfig,
+      xColumn: '',
+    };
+
+    render(<ChartPreview dataset={mockDataset} config={pendingConfig} />);
+
+    expect(screen.getByRole('alert')).toHaveTextContent(/configuração pendente/i);
+    expect(screen.getByRole('alert')).toHaveTextContent(/coluna x não selecionada/i);
+  });
+
+  it('exibe aviso explicativo quando o dataset não possui nenhuma coluna numérica para o eixo Y', () => {
+    const textDataset = {
+      ...mockDataset,
+      columns: [
+        { name: 'nome', type: 'string' as const },
+        { name: 'cidade', type: 'string' as const },
+      ],
+      rows: [
+        { nome: 'Ana', cidade: 'SP' },
+        { nome: 'Bruno', cidade: 'RJ' },
+      ],
+    };
+
+    const configSemY: ChartConfig = {
+      id: 'c-empty-y',
+      datasetId: textDataset.id,
+      type: 'bar',
+      xColumn: 'nome',
+      yColumn: '',
+    };
+
+    render(<ChartPreview dataset={textDataset} config={configSemY} />);
+
+    expect(screen.getByRole('alert')).toHaveTextContent(/ausência de colunas numéricas/i);
+    expect(screen.getByRole('alert')).toHaveTextContent(/não possui nenhuma coluna numérica/i);
+  });
+
+  it('exibe alerta amigável quando todos os valores da coluna Y forem nulos', () => {
+    const allNullDataset = {
+      ...mockDataset,
+      rows: [
+        { mes: 'Jan', vendas: null },
+        { mes: 'Fev', vendas: null },
+      ],
+    };
+
+    render(<ChartPreview dataset={allNullDataset} config={barConfig} />);
+
+    expect(screen.getByRole('alert')).toHaveTextContent(/não possui valores numéricos válidos/i);
+  });
 });

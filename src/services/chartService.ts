@@ -1,4 +1,4 @@
-import { ChartConfig } from '../models/chart';
+import { ChartConfig, validateChartConfig } from '../models/chart';
 import { Dataset } from '../models/dataset';
 
 export interface ExportChartOptions {
@@ -10,6 +10,11 @@ export const exportChartAsPng = async (
   dataset: Dataset,
   options?: ExportChartOptions
 ): Promise<void> => {
+  const validation = validateChartConfig(config, dataset);
+  if (!validation.isValid) {
+    throw new Error(validation.error || 'Configuração do gráfico inválida.');
+  }
+
   const payload = {
     tipo_grafico: config.type,
     coluna_x: config.xColumn,
