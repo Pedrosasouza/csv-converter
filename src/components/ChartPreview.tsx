@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   ResponsiveContainer,
   BarChart,
@@ -25,6 +25,8 @@ export interface ChartPreviewProps {
   config: ChartConfig;
 }
 
+export const MAX_PREVIEW_ROWS = 500;
+
 const PIE_COLORS = [
   '#5862a5', // Gray Blue principal
   '#495084', // Gray Blue ardósia
@@ -46,6 +48,20 @@ const CHART_TYPE_LABELS: Record<string, string> = {
 export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) => {
   const [isExporting, setIsExporting] = useState(false);
   const [exportError, setExportError] = useState<string | null>(null);
+
+  const { displayRows, isSampled, totalRows } = useMemo(() => {
+    const rows = dataset.rows || [];
+    const total = rows.length;
+    if (total <= MAX_PREVIEW_ROWS) {
+      return { displayRows: rows, isSampled: false, totalRows: total };
+    }
+    const step = Math.ceil(total / MAX_PREVIEW_ROWS);
+    const sampled = rows.filter((_, idx) => idx % step === 0);
+    return { displayRows: sampled, isSampled: true, totalRows: total };
+  }, [dataset.rows]);
+
+  const xCol = dataset.columns?.find((c) => c.name === config.xColumn);
+  const xIsNumber = xCol?.type === 'number';
 
   const handleExport = async () => {
     setIsExporting(true);
@@ -218,6 +234,36 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
         </div>
       )}
 
+      {isSampled && (
+        <div
+          data-testid="sampling-notice"
+          className="mb-4 p-3 rounded-xl bg-[#ebecf2] border border-[#d8dae7] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#323a5a]"
+        >
+          <div className="flex items-center gap-2">
+            <svg
+              className="w-4 h-4 text-[#5862a5] shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>
+              Exibindo amostragem de <strong>{displayRows.length}</strong> de{' '}
+              <strong>{totalRows.toLocaleString()}</strong> linhas para visualização fluida no navegador.
+            </span>
+          </div>
+          <span className="text-[11px] text-[#495084] font-medium pl-6 sm:pl-0">
+            A exportação PNG (Matplotlib) processará 100% dos dados.
+          </span>
+        </div>
+      )}
+
       <div className="w-full min-h-[380px] flex items-center justify-center py-2">
         {config.type === 'bar' && (
           <div
@@ -226,7 +272,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
             style={{ width: '100%', height: 380 }}
           >
             <ResponsiveContainer width="100%" height={380}>
-              <BarChart data={dataset.rows} margin={{ top: 10, right: 20, left: 10, bottom: 20 }}>
+              <BarChart data={displayRows} margin={{ top: 10, right: 20, left: 10, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#ebecf2" vertical={false} />
                 <XAxis
                   dataKey={config.xColumn}
@@ -264,7 +310,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
             style={{ width: '100%', height: 380 }}
           >
             <ResponsiveContainer width="100%" height={380}>
-              <LineChart data={dataset.rows} margin={{ top: 10, right: 20, left: 10, bottom: 20 }}>
+              <LineChart data={displayRows} margin={{ top: 10, right: 20, left: 10, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#ebecf2" vertical={false} />
                 <XAxis
                   dataKey={config.xColumn}
@@ -318,7 +364,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
                 />
                 <Legend wrapperStyle={{ paddingTop: '12px' }} />
                 <Pie
-                  data={dataset.rows}
+                  data={displayRows}
                   nameKey={config.xColumn}
                   dataKey={config.yColumn}
                   cx="50%"
@@ -327,7 +373,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
                   innerRadius={60}
                   paddingAngle={3}
                 >
-                  {dataset.rows.map((_, index) => (
+                  {displayRows.map((_, index) => (
                     <Cell
                       key={`cell-${index}`}
                       fill={PIE_COLORS[index % PIE_COLORS.length]}
@@ -351,6 +397,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
                 <XAxis
                   dataKey={config.xColumn}
                   name={config.xColumn}
+                  type={xIsNumber ? 'number' : 'category'}
                   stroke="#7881bb"
                   fontSize={12}
                   tickLine={false}
@@ -375,7 +422,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
                   }}
                 />
                 <Legend wrapperStyle={{ paddingTop: '12px' }} />
-                <Scatter data={dataset.rows} fill="#5862a5" />
+                <Scatter data={displayRows} fill="#5862a5" />
               </ScatterChart>
             </ResponsiveContainer>
           </div>
@@ -387,7 +434,9 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
           <svg className="w-4 h-4 text-[#495084]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          {dataset.rows.length} linhas · {dataset.columns.length} colunas
+          {isSampled
+            ? `${displayRows.length} de ${dataset.rows.length} linhas (amostragem ativa) · ${dataset.columns.length} colunas`
+            : `${dataset.rows.length} linhas · ${dataset.columns.length} colunas`}
         </span>
         <span className="text-[11px] text-[#7881bb]">
           Atualização reativa instantânea

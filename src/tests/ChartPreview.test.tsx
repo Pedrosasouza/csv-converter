@@ -205,4 +205,60 @@ describe('ChartPreview', () => {
 
     expect(screen.getByRole('alert')).toHaveTextContent(/não possui valores numéricos válidos/i);
   });
+
+  it('renderiza o gráfico de dispersão com texto no eixo X sem quebrar a visualização', () => {
+    // mockDataset tem 'mes' como string
+    const scatterConfig: ChartConfig = {
+      ...barConfig,
+      type: 'scatter',
+      xColumn: 'mes',
+      yColumn: 'vendas',
+    };
+
+    render(<ChartPreview dataset={mockDataset} config={scatterConfig} />);
+
+    expect(screen.getByTestId('scatter-chart')).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(/visualização: gráfico do tipo scatter/i)
+    ).toBeInTheDocument();
+  });
+
+  it('ativa amostragem inteligente para datasets com mais de 500 linhas e preserva dados na exportação', async () => {
+    const exportSpy = vi.spyOn(chartService, 'exportChartAsPng').mockResolvedValue();
+
+    // Cria dataset com 1.200 linhas
+    const largeRows = Array.from({ length: 1200 }, (_, i) => ({
+      mes: `Mês ${i + 1}`,
+      vendas: (i + 1) * 10,
+    }));
+
+    const largeDataset = {
+      ...mockDataset,
+      rows: largeRows,
+    };
+
+    render(<ChartPreview dataset={largeDataset} config={barConfig} />);
+
+    // 1. O banner de amostragem deve estar visível
+    const notice = screen.getByTestId('sampling-notice');
+    expect(notice).toBeInTheDocument();
+    expect(notice).toHaveTextContent(/exibindo amostragem de/i);
+    expect(notice).toHaveTextContent(/1\.200/);
+
+    // 2. O rodapé deve indicar amostragem ativa
+    expect(screen.getByText(/amostragem ativa/i)).toBeInTheDocument();
+
+    // 3. Ao clicar em exportar, o dataset original completo (1200 linhas) deve ser enviado
+    const exportBtn = screen.getByTestId('export-png-button');
+    fireEvent.click(exportBtn);
+
+    expect(exportSpy).toHaveBeenCalledWith(barConfig, largeDataset);
+    expect(exportSpy.mock.calls[0][1].rows.length).toBe(1200);
+
+    await waitFor(() => {
+      expect(exportBtn).not.toBeDisabled();
+    });
+
+    exportSpy.mockRestore();
+  });
 });
