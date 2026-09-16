@@ -53,3 +53,7 @@ ehthumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# Diretrizes locais de Agentes de IA
+AGENTS.md
+
