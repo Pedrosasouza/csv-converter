@@ -3,7 +3,6 @@ import { mockDataset } from '../mocks/datasetMock';
 import { ChartConfig, validateChartConfig } from '../models/chart';
 import { DatasetRow } from '../models/dataset';
 import { getDataset } from '../services/datasetService';
-import { isDateString } from '../utils/date';
 
 describe('Dataset Models and Mock - Validação de Contrato Estrutural', () => {
   it('as colunas do Dataset possuem nomes únicos e tipos válidos', () => {
@@ -51,7 +50,7 @@ describe('Dataset Models and Mock - Validação de Contrato Estrutural', () => {
           expect(isBooleanOrNull).toBe(true);
         } else if (expectedType === 'date') {
           const isDateOrNull =
-            value === null || (typeof value === 'string' && isDateString(value));
+            value === null || (typeof value === 'string' && !Number.isNaN(Date.parse(value)));
           expect(isDateOrNull).toBe(true);
         }
       });

@@ -57,25 +57,34 @@ describe('chartService', () => {
       return el;
     });
 
-    await exportChartAsPng(mockConfig, mockDataset, { title: 'Meu Gráfico' });
+    vi.useFakeTimers();
+    try {
+      const exportPromise = exportChartAsPng(mockConfig, mockDataset, { title: 'Meu Gráfico' });
+      await exportPromise;
 
-    expect(fetchMock).toHaveBeenCalledWith('/api/charts/generate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        tipo_grafico: 'bar',
-        coluna_x: 'Mes',
-        colunas_y: ['Vendas'],
-        titulo: 'Meu Gráfico',
-        rows: mockDataset.rows,
-      }),
-    });
+      expect(fetchMock).toHaveBeenCalledWith('/api/charts/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          tipo_grafico: 'bar',
+          coluna_x: 'Mes',
+          colunas_y: ['Vendas'],
+          titulo: 'Meu Gráfico',
+          rows: mockDataset.rows,
+        }),
+      });
 
-    expect(createObjectURLMock).toHaveBeenCalledWith(fakeBlob);
-    expect(clickMock).toHaveBeenCalled();
-    expect(revokeObjectURLMock).toHaveBeenCalledWith('blob:http://localhost/fake-url');
+      expect(createObjectURLMock).toHaveBeenCalledWith(fakeBlob);
+      expect(clickMock).toHaveBeenCalled();
+      expect(revokeObjectURLMock).not.toHaveBeenCalled();
+
+      vi.advanceTimersByTime(1000);
+      expect(revokeObjectURLMock).toHaveBeenCalledWith('blob:http://localhost/fake-url');
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('exportChartAsPng lança erro com mensagem do backend quando a API responde com erro HTTP', async () => {

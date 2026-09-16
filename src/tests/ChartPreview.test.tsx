@@ -261,4 +261,50 @@ describe('ChartPreview', () => {
 
     exportSpy.mockRestore();
   });
+
+  it('exibe alerta específico de amostragem em gráfico de pizza quando a amostragem estiver ativa', () => {
+    const pieConfig: ChartConfig = {
+      ...barConfig,
+      type: 'pie',
+    };
+
+    const largeRows = Array.from({ length: 600 }, (_, i) => ({
+      mes: `Mês ${i + 1}`,
+      vendas: (i + 1) * 10,
+    }));
+
+    const largeDataset = {
+      ...mockDataset,
+      rows: largeRows,
+    };
+
+    render(<ChartPreview dataset={largeDataset} config={pieConfig} />);
+
+    expect(screen.getByTestId('sampling-notice')).toBeInTheDocument();
+    const pieAlert = screen.getByTestId('pie-sampling-alert');
+    expect(pieAlert).toBeInTheDocument();
+    expect(pieAlert).toHaveTextContent(/amostragem em gráficos de pizza pode distorcer a proporção relativa/i);
+  });
+
+  it('renderiza com segurança gráfico de pizza quando há linhas com valores nulos no eixo Y', () => {
+    const pieConfig: ChartConfig = {
+      ...barConfig,
+      type: 'pie',
+    };
+
+    const datasetComNull = {
+      ...mockDataset,
+      rows: [
+        { mes: 'Janeiro', vendas: 100 },
+        { mes: 'Fevereiro', vendas: null },
+        { mes: 'Março', vendas: 150 },
+      ],
+    };
+
+    expect(() => {
+      render(<ChartPreview dataset={datasetComNull} config={pieConfig} />);
+    }).not.toThrow();
+
+    expect(screen.getByTestId('pie-chart')).toBeInTheDocument();
+  });
 });

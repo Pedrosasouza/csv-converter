@@ -166,33 +166,17 @@ async def generate_chart(req: GenerateChartRequest):
             detail="Coluna(s) do eixo Y não informada(s).",
         )
 
-    temp_dir = tempfile.gettempdir()
-    unique_id = f"{time.time()}_{os.getpid()}"
-    temp_csv = os.path.join(temp_dir, f"chart_input_{unique_id}.csv")
-    temp_png = os.path.join(temp_dir, f"chart_output_{unique_id}.png")
-
     try:
         df = pd.DataFrame(req.rows)
-        df.to_csv(temp_csv, index=False)
 
-        usecase = GerarGraficoUseCase.a_partir_de_arquivo(
-            caminho_csv=temp_csv,
+        usecase = GerarGraficoUseCase.a_partir_de_dataframe(
+            df=df,
             tipo_grafico=req.tipo_grafico,
             coluna_x=req.coluna_x,
             colunas_y=req.colunas_y,
             titulo=req.titulo or "Gráfico",
-            caminho_saida=temp_png,
         )
-        usecase.executar()
-
-        if not os.path.exists(temp_png):
-            raise HTTPException(
-                status_code=500,
-                detail="Erro ao gerar a imagem do gráfico.",
-            )
-
-        with open(temp_png, "rb") as f:
-            png_bytes = f.read()
+        png_bytes = usecase.executar_em_memoria()
 
         return Response(
             content=png_bytes,
@@ -208,11 +192,4 @@ async def generate_chart(req: GenerateChartRequest):
             status_code=500,
             detail=f"Erro interno ao renderizar gráfico: {str(e)}",
         )
-    finally:
-        for path in [temp_csv, temp_png]:
-            if os.path.exists(path):
-                try:
-                    os.remove(path)
-                except OSError:
-                    pass
 

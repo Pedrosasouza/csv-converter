@@ -60,6 +60,16 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
     return { displayRows: sampled, isSampled: true, totalRows: total };
   }, [dataset.rows]);
 
+  const pieRows = useMemo(() => {
+    if (config.type !== 'pie') return displayRows;
+    return displayRows.filter(
+      (r) =>
+        r[config.yColumn] !== null &&
+        r[config.yColumn] !== undefined &&
+        r[config.yColumn] !== ''
+    );
+  }, [displayRows, config.type, config.yColumn]);
+
   const xCol = dataset.columns?.find((c) => c.name === config.xColumn);
   const xIsNumber = xCol?.type === 'number';
 
@@ -237,30 +247,55 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
       {isSampled && (
         <div
           data-testid="sampling-notice"
-          className="mb-4 p-3 rounded-xl bg-[#ebecf2] border border-[#d8dae7] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#323a5a]"
+          className="mb-4 p-3 rounded-xl bg-[#ebecf2] border border-[#d8dae7] flex flex-col gap-2 text-xs text-[#323a5a]"
         >
-          <div className="flex items-center gap-2">
-            <svg
-              className="w-4 h-4 text-[#5862a5] shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span>
-              Exibindo amostragem de <strong>{displayRows.length}</strong> de{' '}
-              <strong>{totalRows.toLocaleString()}</strong> linhas para visualização fluida no navegador.
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <svg
+                className="w-4 h-4 text-[#5862a5] shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>
+                Exibindo amostragem de <strong>{displayRows.length}</strong> de{' '}
+                <strong>{totalRows.toLocaleString()}</strong> linhas para visualização fluida no navegador.
+              </span>
+            </div>
+            <span className="text-[11px] text-[#495084] font-medium pl-6 sm:pl-0">
+              A exportação PNG (Matplotlib) processará 100% dos dados.
             </span>
           </div>
-          <span className="text-[11px] text-[#495084] font-medium pl-6 sm:pl-0">
-            A exportação PNG (Matplotlib) processará 100% dos dados.
-          </span>
+          {config.type === 'pie' && (
+            <div
+              data-testid="pie-sampling-alert"
+              className="mt-1 pt-2 border-t border-[#d8dae7] flex items-start gap-1.5 text-[11px] text-amber-800"
+            >
+              <svg
+                className="w-4 h-4 text-amber-600 shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+              <span>
+                <strong>Atenção:</strong> A amostragem em gráficos de pizza pode distorcer a proporção relativa das fatias e omitir categorias. Para visualizar a distribuição real e exata com todos os registros, exporte o gráfico em PNG.
+              </span>
+            </div>
+          )}
         </div>
       )}
 
@@ -364,7 +399,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
                 />
                 <Legend wrapperStyle={{ paddingTop: '12px' }} />
                 <Pie
-                  data={displayRows}
+                  data={pieRows}
                   nameKey={config.xColumn}
                   dataKey={config.yColumn}
                   cx="50%"
@@ -373,7 +408,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({ dataset, config }) =
                   innerRadius={60}
                   paddingAngle={3}
                 >
-                  {displayRows.map((_, index) => (
+                  {pieRows.map((_, index) => (
                     <Cell
                       key={`cell-${index}`}
                       fill={PIE_COLORS[index % PIE_COLORS.length]}

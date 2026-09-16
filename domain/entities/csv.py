@@ -20,6 +20,22 @@ class CsvEntidade:
         self.numero_linhas: int = 0
         self.dados: DataFrame = None
 
+    @classmethod
+    def a_partir_de_dataframe(
+        cls, df: DataFrame, permitir_coluna_unica: bool = True
+    ) -> "CsvEntidade":
+        """Cria e popula uma CsvEntidade diretamente a partir de um DataFrame em memória."""
+        if df is None or df.empty:
+            raise ValueError("O DataFrame informado está vazio ou é inválido.")
+
+        instancia = cls(caminho_arquivo="", permitir_coluna_unica=permitir_coluna_unica)
+        instancia.dados = df.copy()
+        instancia.dados.columns = [str(c).strip() for c in instancia.dados.columns]
+        instancia.colunas = list(instancia.dados.columns)
+        instancia.tipo_de_dados = instancia._mapear_tipos()
+        instancia.numero_linhas = len(instancia.dados)
+        return instancia
+
     def carregar(self) -> "CsvEntidade":
         """Lê o CSV do disco, valida e popula os atributos derivados."""
         self._validar_arquivo()

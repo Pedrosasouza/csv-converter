@@ -75,8 +75,14 @@ class Grafico:
         cores = self.cores or plt.rcParams["axes.prop_cycle"].by_key()["color"]
 
         if self.tipo_grafico == "pie":
-            ax.pie(df[self.colunas_y[0]],
-                   labels=df[self.coluna_x], autopct="%1.1f%%")
+            coluna_y = self.colunas_y[0]
+            df_pie = df[df[coluna_y].notna()]
+            if df_pie.empty:
+                raise ValueError(
+                    f"A coluna '{coluna_y}' não possui valores válidos para gerar o gráfico de pizza."
+                )
+            ax.pie(df_pie[coluna_y],
+                   labels=df_pie[self.coluna_x], autopct="%1.1f%%")
         else:
             for i, coluna_y in enumerate(self.colunas_y):
                 cor = cores[i % len(cores)]
